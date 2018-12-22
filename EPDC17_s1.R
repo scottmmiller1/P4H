@@ -2,7 +2,7 @@
 ##    EPDC 2017   ##
 ####################
 
-setwd("/Users/Scott/Desktop/P4H Global/Evaluation/Evaluation Analysis/EPDC_17/")
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/EPDC_17/")
 s1 <- read.csv("EPDC_17_S1.csv")
 s1[s1 == 88] <- NA
 
@@ -125,5 +125,27 @@ for (i in seq(3,19,by=2)) {
 for (i in seq(3,19,by=2)) {
   print(chisq.test(s1[,i], s1[,i-1]))
     }
+
+# --------------------------------------------------------
+#   Charts 
+    
+BA1
+
+BA.1 <- BA1[1:2,]
+rownames(BA.1) <- c("Before", "After")
+colnames(BA.1) <- c("0 Units", "1 Unit", "2 Units", "3 Units", "4 Units")
+BA.1      
+
+barplot(BA.1, col= c("royalblue3","red2") , border="white", main = "", font.axis=2, beside=T, font.lab=2) 
+legend("topleft",
+       legend = rownames(BA.1), 
+       fill = c("royalblue3","red2"),
+       horiz = T, inset = c(0,.2))
+
+
+
+
+
+
 
 
