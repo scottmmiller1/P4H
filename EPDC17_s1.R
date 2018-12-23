@@ -136,7 +136,7 @@ rownames(BA.1) <- c("Before", "After")
 colnames(BA.1) <- c("0 Units", "1 Unit", "2 Units", "3 Units", "4 Units")
 BA.1      
 
-barplot(BA.1, col= c("royalblue3","red2") , border="white", main = "", font.axis=2, beside=T, font.lab=2) 
+barplot(BA.1, col= c("royalblue3","red2"), border="white", main = "", font.axis=2, beside=T, font.lab=2) 
 legend("topleft",
        legend = rownames(BA.1), 
        fill = c("royalblue3","red2"),

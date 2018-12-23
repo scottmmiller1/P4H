@@ -1,8 +1,8 @@
 
-setwd("/Users/scottmiller/Desktop/EPD_18")
-dta <- read.csv("EPD Exam Data.csv")
+setwd("/Users/scottmiller/Desktop/PD_18")
+dta <- read.csv("Exam Analysis/PD Exam Data.csv")
 #install.packages("dplyr")
-#install.packages("tidyverse")
+install.packages("tidyverse")
 #library(dplyr)
 library(tidyverse)
 
@@ -12,6 +12,7 @@ dta1 <- dta1[-c(214:218),-23] # new dataset with missing rows / cols removed
 num <- matrix(0,nrow(dta1),17)
 num[,1] <- dta1[,1]
 
+# label answer choices
 for (i in 2:nrow(num)) {
   for (j in 6:21) {
     if (dta1[i,j] == "v") {
