@@ -244,7 +244,7 @@ for (i in 2:13) {
 }
 
 View(BA1)
-write.csv(BA1, "BA1.csv")
+#write.csv(BA1, "BA1.csv")
 
 
 ## difference table
@@ -259,7 +259,7 @@ for (i in seq(3,13,by=2)) {
 diff1 <- diff1[-c(seq(2,18,by=2)),]
 
 View(diff1)
-write.csv(diff1, "diff1.csv")
+#write.csv(diff1, "diff1.csv")
 
 
 ## Average before/after/difference
@@ -280,7 +280,7 @@ for (i in seq(3,13,by=2)) {
 }
 avg1 <- avg1[-c(seq(1,17,by=2)),]
 View(avg1)
-write.csv(avg1, "avg1.csv")
+#write.csv(avg1, "avg1.csv")
 
 #-----------------------------------------
 
@@ -296,7 +296,7 @@ for (i in 14:17) {
 }
 
 View(eval) 
-write.csv(eval, "eval.csv")
+#write.csv(eval, "eval.csv")
 
 #percentage
 evalpct <- matrix(0,6,5)
@@ -308,7 +308,7 @@ for (i in 14:17) {
 }
 
 View(evalpct) 
-write.csv(evalpct, "evalpct.csv")
+#write.csv(evalpct, "evalpct.csv")
 
 
 #-----------------------------------------
@@ -324,7 +324,7 @@ for (i in 18:25) {
 }
 
 View(dem1) 
-write.csv(dem1, "dem1.csv")
+#write.csv(dem1, "dem1.csv")
 
 # Experience
 mean(Harvey$X14, na.rm = T)
@@ -354,7 +354,7 @@ for (i in 2:13) {
 }
 
 View(BA1)
-write.csv(BA1, "BA1.csv")
+#write.csv(BA1, "BA1.csv")
 
 
 ## difference table
@@ -369,7 +369,7 @@ for (i in seq(3,13,by=2)) {
 diff1 <- diff1[-c(seq(2,18,by=2)),]
 
 View(diff1)
-write.csv(diff1, "diff1.csv")
+#write.csv(diff1, "diff1.csv")
 
 
 ## Average before/after/difference
@@ -390,7 +390,7 @@ for (i in seq(3,13,by=2)) {
 }
 avg1 <- avg1[-c(seq(1,17,by=2)),]
 View(avg1)
-write.csv(avg1, "avg1.csv")
+#write.csv(avg1, "avg1.csv")
 
 #-----------------------------------------
 
@@ -406,7 +406,7 @@ for (i in 14:17) {
 }
 
 View(eval) 
-write.csv(eval, "eval.csv")
+#write.csv(eval, "eval.csv")
 
 #percentage
 evalpct <- matrix(0,6,5)
@@ -418,7 +418,7 @@ for (i in 14:17) {
 }
 
 View(evalpct) 
-write.csv(evalpct, "evalpct.csv")
+#write.csv(evalpct, "evalpct.csv")
 
 
 #-----------------------------------------
@@ -434,7 +434,7 @@ for (i in 18:25) {
 }
 
 View(dem1) 
-write.csv(dem1, "dem1.csv")
+#write.csv(dem1, "dem1.csv")
 
 # Experience
 mean(ESM$X14, na.rm = T)
