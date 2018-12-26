@@ -2,7 +2,7 @@
 setwd("/Users/scottmiller/Desktop/PD_18")
 dta <- read.csv("Exam Analysis/PD Exam Data.csv")
 #install.packages("dplyr")
-install.packages("tidyverse")
+#install.packages("tidyverse")
 #library(dplyr)
 library(tidyverse)
 
