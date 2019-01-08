@@ -85,7 +85,7 @@ dem.vars <- c(26:33)
 
 for (i in dem.vars) {
   for (j in 0:7) {
-    dem1[i-25,j+1] <- length(which(dta[,i]==j))
+    dem[i-25,j+1] <- length(which(dta[,i]==j))
   }
 }
 

@@ -23,74 +23,45 @@ dev.off()
 
 sum(dem[1,])
 
-# Age
-age <- round(c(dem[2,2:7]) / sum(dem[2,2:7]), digits = 2)*100 
+# College Status
+college <- round(c(dem[2,2:7]) / sum(dem[2,2:7]), digits = 2)*100 
 
 png("dem2.png", width = 700) 
-pie(age, labels = paste(c("",age[2:5],""),c("",rep("%",4),""),sep=""), 
+pie(college, labels = paste(college,"%",sep=""), 
     col= c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"), 
     cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("< 18","18-24","25-34","35-44","45-54","55-64"), 
+legend("top", legend = c("Freshman","Sophomore","Junior","Senior","Gradute","Faculty"),
        fill = c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"),
-       horiz = T, cex = 1.2, yjust = 2)
+       horiz = T, cex = 1,yjust = 1)
 dev.off() 
 
 sum(dem[2,])
 
-# Education
-edu <- round(c(dem[3,2:5]) / sum(dem[3,2:5]), digits = 2)*100 
+# Race
+race <- round(c(dem[4,3:6]) / sum(dem[4,3:6]), digits = 2)*100 
 
 png("dem3.png", width = 700) 
-pie(edu, labels = paste(edu,"%",sep=""), 
+pie(race, labels = paste(race,"%",sep=""), 
     col= c("grey","royalblue3","gray48","firebrick2"), 
     cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Primary","Secondary","Some University","University"), 
+legend("top", legend = c("Asian","African American / Black","Other","White"), 
        fill = c("grey","royalblue3","gray48","firebrick2"),
-       horiz = T, cex = 1.2, yjust = 2)
+       horiz = T, cex = .9)
 dev.off() 
 
 sum(dem[3,])
 
-# School Type
-schtype <- round(c(dem[4,2:5]) / sum(dem[4,2:5]), digits = 2)*100 
+# Travel
+travel <- round(c(dem[7,2:5]) / sum(dem[7,2:5]), digits = 2)*100 
 
-png("dem4.png", width = 700) 
-pie(schtype, labels = paste(schtype,"%",sep=""), col= c("grey","royalblue3","gray48","firebrick2"), 
+png("dem7.png", width = 700) 
+barplot(travel, labels = paste(travel,"%",sep=""),
     cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Public","Private","Both","Not a Teacher"), 
-       fill = c("grey","royalblue3","gray48","firebrick2"),
-       horiz = T, cex = 1.2, yjust = 2)
 dev.off() 
 
-sum(dem[4,])
+sum(dem[10,])
 
-# Level
-level <- round(c(dem[8,2:5]) / sum(dem[8,2:5]), digits = 2)*100 
-
-png("dem5.png", width = 700) 
-pie(level, labels = paste(level,"%",sep=""), col= c("grey","royalblue3","gray48","firebrick2"), 
-    cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Primary","Secondary","University","Other"), 
-       fill = c("grey","royalblue3","gray48","firebrick2"),
-       horiz = T, cex = 1.2, yjust = 2)
-dev.off() 
-
-sum(dem[8,])
-
-# Prior Training
-train <- round(c(dem[9,2:3]) / sum(dem[9,2:3]), digits = 2)*100 
-
-png("dem6.png", width = 700) 
-pie(train, labels = paste(train,"%",sep=""), col= c("royalblue3","firebrick2"), 
-    cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Yes","No"), 
-       fill = c("royalblue3","firebrick2"),
-       horiz = T, cex = 1.2, yjust = 2)
-dev.off() 
-
-sum(dem[9,])
-
-# P4H Training
+# P4H Travel
 p4h <- round(c(dem[10,2:3]) / sum(dem[10,2:3]), digits = 2)*100 
 
 png("dem7.png", width = 700) 
@@ -425,7 +396,7 @@ rownames(B_A8) <- c("Before","After")
 png("b8.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b8 <- barplot(B_A8, col= c("royalblue3","firebrick2"), border="white", 
-              main = "Career Trajectory", cex.main = 2,
+              main = "Team Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,20), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A8), 
@@ -437,7 +408,7 @@ dev.off()
 png("c8.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c8 <- barplot(d[8,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Career Trajectory", cex.main = 2,
+              main = "Change in Team Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,16), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c8, d[8,] + 1, paste(d[8,],sep="") ,cex=1.9) 
@@ -455,7 +426,7 @@ rownames(B_A9) <- c("Before","After")
 png("b9.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b9 <- barplot(B_A9, col= c("royalblue3","firebrick2"), border="white", 
-              main = "Career Trajectory", cex.main = 2,
+              main = "Haitian Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,20), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A9), 
@@ -467,7 +438,7 @@ dev.off()
 png("c9.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c9 <- barplot(d[9,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Career Trajectory", cex.main = 2,
+              main = "Change in Haitian Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,16), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c9, d[9,] + 1, paste(d[9,],sep="") ,cex=1.9) 
