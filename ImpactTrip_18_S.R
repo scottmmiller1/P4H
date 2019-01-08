@@ -8,21 +8,17 @@ dta <- read.csv("2018 Summer Impact Trip Data.csv")
 
 ## Trip Process ##
 
-# ID, prep, tinfo, cinfo, nightly, fsafety, support, nmissed
-
 #overall
-trip1 <- matrix(0,6,5)
+trip <- matrix(0,6,5)
 
 trip.vars <- c(1:6)
 
 for (i in trip.vars) {
   for (j in 1:5) {
-    trip1[i,j] <- length(which(dta[,i]==j))
+    trip[i,j] <- length(which(dta[,i]==j))
   }
 }
 
-View(trip1) 
-#write.csv(trip1, "trip1.csv")
 
 #percentage
 trip1pct <- matrix(0,6,5)
@@ -33,8 +29,6 @@ for (i in trip.vars) {
   }
 }
 
-View(trip1pct) 
-#write.csv(trip1pct, "trip1pct.csv")
 
 # meetings missed
 summary(dta$X7)
@@ -53,8 +47,6 @@ for (i in ba.vars) {
   }
 }
 
-View(BA1)
-#write.csv(BA1, "BA1.csv")
 
 ## difference table
 
@@ -68,9 +60,6 @@ for (i in diff.vars) {
   }
 }
 diff1 <- diff1[-c(seq(2,18,by=2)),]
-
-View(diff1)
-#write.csv(diff1, "diff1.csv")
 
 
 ## Average before/after/difference
@@ -86,13 +75,11 @@ for (i in diff.vars) {
   avg1[i-8,3] <- mean(dta[,i]-dta[,i-1],na.rm = T) 
 }
 avg1 <- avg1[-c(seq(2,18,by=2)),]
-View(avg1)
-#write.csv(avg1, "avg1.csv")
 
 
 ## Demographics ##
 
-dem1 <- matrix(0,8,8)
+dem <- matrix(0,8,8)
 
 dem.vars <- c(26:33)
 
@@ -101,9 +88,6 @@ for (i in dem.vars) {
     dem1[i-25,j+1] <- length(which(dta[,i]==j))
   }
 }
-
-View(dem1) 
-#write.csv(dem1, "dem1.csv")
 
 
 ## Statistical Tests ##
@@ -121,12 +105,12 @@ for (i in seq(1,17,by=2)) {
   print(chisq.test(dta[,i+9], dta[,i+8]))
 }
 
-# Not statistically significant: Perform, Career, 
+# Not statistically significant:
 
 
 for (i in seq(1,17,by=2)) {
   print(cor.test(dta[,i+9], dta[,i+8], "greater", "spearman"))
 }
 
-# Not statistically significant: Perform
+# Not statistically significant:
 
