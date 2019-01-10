@@ -52,27 +52,31 @@ dev.off()
 sum(dem[3,])
 
 # Travel
-travel <- round(c(dem[7,2:5]) / sum(dem[7,2:5]), digits = 2)*100 
+travel <- round(c(dem[7,1:7]) / sum(dem[7,1:7]), digits = 2)*100 
 
-png("dem7.png", width = 700) 
-barplot(travel, labels = paste(travel,"%",sep=""),
-    cex = 2, radius = .7, clockwise = T)
+png("dem4.png", width = 800) 
+op <- par(mar = c(4,4,4,2) + 1)
+dem4 <- barplot(travel, names.arg = c("0","1","2","3","4","5","6"), las=1, col= c("royalblue3"), border="white", 
+              main = "International Travel", cex.main = 2,
+              font.main = 1, font.axis=1, space = 1,
+              ylim = c(0,40), font.lab=1, cex.axis = 1.5, cex.names = 1.5)
+text(dem4, travel + 2, paste(travel,"%",sep="") ,cex=1.9) 
+par(op) ## reset
 dev.off() 
 
-sum(dem[10,])
 
 # P4H Travel
-p4h <- round(c(dem[10,2:3]) / sum(dem[10,2:3]), digits = 2)*100 
+p4h <- round(c(dem[8,1:7]) / sum(dem[8,1:7]), digits = 2)*100 
 
-png("dem7.png", width = 700) 
-pie(p4h, labels = paste(p4h,"%",sep=""), col= c("royalblue3","firebrick2"), 
-    cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Yes","No"), 
-       fill = c("royalblue3","firebrick2"),
-       horiz = T, cex = 1.2, yjust = 2)
+png("dem5.png", width = 800) 
+op <- par(mar = c(4,4,4,2) + 1)
+dem5 <- barplot(p4h, names.arg = c("0","1","2","3","4","5","6"), las=1, col= c("royalblue3"), border="white", 
+                main = "P4H Travel", cex.main = 2,
+                font.main = 1, font.axis=1, space = 1,
+                ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5)
+text(dem5, p4h + 5, paste(p4h,"%",sep="") ,cex=1.9) 
+par(op) ## reset
 dev.off() 
-
-sum(dem[10,])
 
 # -------------------------------------------------------------------------
 
