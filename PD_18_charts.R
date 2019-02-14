@@ -80,6 +80,7 @@ legend("top",
 par(op) ## reset
 dev.off() 
 
+sum()
 
 # 2
 pre_post2 <- t(pre_post2[,2:3])
