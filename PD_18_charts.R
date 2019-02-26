@@ -1,5 +1,5 @@
 
-setwd("/Users/scottmiller/Desktop/PD_18/HOH/Rplots")
+setwd("/Users/scottmiller/Desktop/PD_18/RTS/Rplots")
 
 
 ##########################
@@ -17,8 +17,9 @@ growth <- t(c(rep(0,n.quest)))
 # group questions by correct answer
 true.A <- c(5,7,9)
 false.B <- c(1:4,6,8)
-C <- c(13,14,16)
+C <- c(13,14)
 D <- c(10:12,15)
+E <- c(16)
 
 # true / A
 for (i in true.A) {
@@ -36,6 +37,11 @@ for (i in C) {
 for (i in D) {
   growth[i] <- round(post_pct[i,5] - pre_pct[i,5], digits = 2)*100
 }
+# E
+for (i in E) {
+  growth[i] <- round(post_pct[i,6] - pre_pct[i,6], digits = 2)*100
+}
+
 
 colnames(growth) <- c("Knowledge Source", "Physical Punishment", "Student Leadership", "Teacher-Centered", 
               "Classroom Activities", "Classroom Management", "Rules & Procedures", "Behaviorism",
@@ -45,7 +51,7 @@ colnames(growth) <- c("Knowledge Source", "Physical Punishment", "Student Leader
 
 png("growth_pct.png", width = 1000, height = 600) 
 op <- par(mar = c(13,4,2,1) + 1)
-growth.pct <- barplot(growth, names.arg = colnames(growth), las=2, cex.names=1.2, ylim = c(0,90), 
+growth.pct <- barplot(growth, names.arg = colnames(growth), las=2, cex.names=1.2, ylim = c(0,110), 
                       font.lab=1, font.main = 1, font.axis = 1,
                       col= c("royalblue3") , border="white", main = "Growth %", cex.main=2) 
 text(growth.pct, growth + 4 , paste(growth,"%",sep="") ,cex=1.3) 
@@ -89,7 +95,7 @@ colnames(pre_post2) <- c("Pre","Post")
 png("pp2.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp2 <- barplot(pre_post2, col= c("grey","royalblue3"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp2, pre_post2 + 5, paste(pre_post2,"%",sep="") ,cex=2) 
 legend("top",
        legend = rownames(pre_post2), 
@@ -107,7 +113,7 @@ colnames(pre_post3) <- c("Pre","Post")
 png("pp3.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp3 <- barplot(pre_post3, col= c("grey","royalblue3"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp3, pre_post3 + 5, paste(pre_post3,"%",sep="") ,cex=2) 
 legend("top",
        legend = rownames(pre_post3), 
@@ -143,7 +149,7 @@ colnames(pre_post5) <- c("Pre","Post")
 png("pp5.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp5 <- barplot(pre_post5, col= c("royalblue3","grey"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp5, pre_post5 + 5, paste(pre_post5,"%",sep="") ,cex=2) 
 legend("top",
        legend = rownames(pre_post5), 
@@ -161,7 +167,7 @@ colnames(pre_post6) <- c("Pre","Post")
 png("pp6.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp6 <- barplot(pre_post6, col= c("grey","royalblue3"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp6, pre_post6 + 5, paste(pre_post6,"%",sep="") ,cex=2) 
 legend("top",
        legend = rownames(pre_post6), 
@@ -184,7 +190,7 @@ colnames(pre_post8) <- c("Pre","Post")
 png("pp8.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp8 <- barplot(pre_post8, col= c("dimgrey","royalblue3","darkgrey","grey"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp8, pre_post8 + 5, paste(pre_post8,"%",sep="") ,cex=1.9) 
 legend("top",
        legend = rownames(pre_post8), 
@@ -202,7 +208,7 @@ colnames(pre_post9) <- c("Pre","Post")
 png("pp9.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp9 <- barplot(pre_post9, col= c("royalblue3","dimgrey","darkgrey","grey"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp9, pre_post9 + 5, paste(pre_post9,"%",sep="") ,cex=1.9) 
 legend("top",
        legend = rownames(pre_post9), 
@@ -328,18 +334,18 @@ dev.off()
 
 # 16
 
-pre_post16 <- t(pre_post16[,2:5])
-rownames(pre_post16) <- c("A","B","C","D")
+pre_post16 <- t(pre_post16[,2:6])
+rownames(pre_post16) <- c("A","B","C","D","E")
 colnames(pre_post16) <- c("Pre","Post")
 
 png("pp16.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-pp16 <- barplot(pre_post16, col= c("dimgrey","darkgrey","royalblue3","grey"), border="white", main = "", font.axis=1, beside=T,
+pp16 <- barplot(pre_post16, col= c("dimgrey","darkgrey","grey","lightgrey","royalblue3"), border="white", main = "", font.axis=1, beside=T,
                 ylim = c(0,110), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp16, pre_post16 + 5, paste(pre_post16,"%",sep="") ,cex=1.9) 
 legend("top",
        legend = rownames(pre_post16), 
-       fill = c("dimgrey","darkgrey","royalblue3","grey"),
+       fill = c("dimgrey","darkgrey","grey","lightgrey","royalblue3"),
        horiz = T, cex = 1.5)
 par(op) ## reset
 dev.off() 
@@ -353,7 +359,7 @@ dev.off()
 
 ## Run PD_Eval_18 prior to this section
 
-setwd("/Users/scottmiller/Desktop/PD_18/HOH/Rplots")
+setwd("/Users/scottmiller/Desktop/PD_18/RTS/Rplots")
 
 # Summary
 
@@ -399,6 +405,9 @@ v.h <- v.h[-seq(2,12, by = 2)]
 
 adj.tot <- c(rep(0,6))
 for (i in 1:6) {
+  if (pos[i] == 100) {
+    v.h[i] <- 0
+  }
   adj.tot[i] <- pos[i] + v.h[i] 
 }
 
@@ -431,7 +440,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b1 <- barplot(B_A1, col= c("royalblue3","firebrick2"), border="white", 
               main = "Knowledge of Disciplinary Interventions", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 #text(b1, B_A1 + 5, paste(B_A1,"%",sep="") ,cex=1.9) 
 legend("top", legend = rownames(B_A1), 
        fill = c("royalblue3","firebrick2"),
@@ -444,8 +453,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c1 <- barplot(d[1,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Knowledge of Disciplinary Interventions", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c1, d[1,] + 12, paste(d[1,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c1, d[1,] + 1, paste(d[1,],sep="") ,cex=1.9) 
 #legend("top", legend = rownames(d1), 
 #       fill = c("royalblue3","firebrick2"),
 #       horiz = T, cex = 1.5)
@@ -465,7 +474,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b2 <- barplot(B_A2, col= c("royalblue3","firebrick2"), border="white", 
               main = "Knowledge of Student-Centered Classrooms", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A2), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
@@ -477,8 +486,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c2 <- barplot(d[2,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Knowledge of Student-Centered Classrooms", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c2, d[2,] + 12, paste(d[2,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c2, d[2,] + 1, paste(d[2,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -495,7 +504,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b3 <- barplot(B_A3, col= c("royalblue3","firebrick2"), border="white", 
               main = "Capacity to Manage Classroom", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A3), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
@@ -507,8 +516,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c3 <- barplot(d[3,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Capacity to Manage Classroom", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c3, d[3,] + 12, paste(d[3,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c3, d[3,] + 1, paste(d[3,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -525,7 +534,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b4 <- barplot(B_A4, col= c("royalblue3","firebrick2"), border="white", 
               main = "Collaborative Learning Strategies", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A4), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
@@ -537,8 +546,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c4 <- barplot(d[4,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Collaborative Learning Strategies", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c4, d[4,] + 12, paste(d[4,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c4, d[4,] + 1, paste(d[4,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -555,7 +564,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b5 <- barplot(B_A5, col= c("royalblue3","firebrick2"), border="white", 
               main = "Role", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A5), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
@@ -567,8 +576,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c5 <- barplot(d[5,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Role", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c5, d[5,] + 12, paste(d[5,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c5, d[5,] + 1, paste(d[5,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -585,7 +594,7 @@ op <- par(mar = c(4,4,4,1) + 1)
 b6 <- barplot(B_A6, col= c("royalblue3","firebrick2"), border="white", 
               main = "Learning Theories", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(B_A6), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
@@ -597,8 +606,8 @@ op <- par(mar = c(4,4,4,2) + 1)
 c6 <- barplot(d[6,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Learning Theories", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c6, d[6,] + 12, paste(d[6,],sep="") ,cex=1.9) 
+              ylim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c6, d[6,] + 1, paste(d[6,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -616,8 +625,8 @@ op <- par(mar = c(4,11,2,2) + 1)
 e1 <- barplot(eval[1,], names.arg = colnames(eval), las=1, col= c("royalblue3"), border="white", 
               main = "", cex.main = 1.6, horiz = T,
               font.main = 1, font.axis=1, space = 1,
-              xlim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(y = e1, eval[1,] + 12, paste(eval[1,],sep="") ,cex=1.9) 
+              xlim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(y = e1, eval[1,] + 1, paste(eval[1,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -629,8 +638,8 @@ op <- par(mar = c(4,11,2,2) + 1)
 e2 <- barplot(eval[2,], names.arg = colnames(eval), las=1, col= c("royalblue3"), border="white", 
               main = "", cex.main = 1.6, horiz = T,
               font.main = 1, font.axis=1, space = 1,
-              xlim = c(0,150), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(y = e2, eval[2,] + 12, paste(eval[2,],sep="") ,cex=1.9) 
+              xlim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(y = e2, eval[2,] + 1, paste(eval[2,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -642,8 +651,8 @@ op <- par(mar = c(4,11,2,2) + 1)
 e3 <- barplot(eval[3,], names.arg = colnames(eval), las=1, col= c("royalblue3"), border="white", 
               main = "", cex.main = 1.6, horiz = T,
               font.main = 1, font.axis=1, space = 1,
-              xlim = c(0,170), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(y = e3, eval[3,] + 12, paste(eval[3,],sep="") ,cex=1.9) 
+              xlim = c(0,30), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(y = e3, eval[3,] + 1, paste(eval[3,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -655,8 +664,8 @@ op <- par(mar = c(4,11,2,2) + 1)
 e4 <- barplot(eval[4,], names.arg = colnames(eval), las=1, col= c("royalblue3"), border="white", 
               main = "", cex.main = 1.6, horiz = T,
               font.main = 1, font.axis=1, space = 1,
-              xlim = c(0,170), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(y = e4, eval[4,] + 12, paste(eval[4,],sep="") ,cex=1.9) 
+              xlim = c(0,35), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(y = e4, eval[4,] + 1, paste(eval[4,],sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 

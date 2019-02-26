@@ -5,8 +5,8 @@ library(tidyverse)
 
 
 dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
-dta1 <- dta1[-1,-c(22:23)] # new dataset with missing rows / cols removed
-dta1 <- filter(dta1, dta1$School == "HOH") # change for each school
+dta1 <- dta1[,-c(22:23)] # new dataset with missing rows / cols removed
+dta1 <- filter(dta1, dta1$School == "RTS") # change for each school
 
 num <- matrix(0,nrow(dta1),17)
 num[,1] <- dta1[,1]
@@ -39,10 +39,6 @@ for (i in 1:nrow(num)) {
 
 # -------------------------------------------------------
 
-###################
-#    Combined     #
-###################
-
 #overall
 answers <- matrix(0,16,6)
 
@@ -55,7 +51,7 @@ for (i in 1:16) {
 # -------------------------------------------------------
 
 #Pre
-pre_num <- num[-c(seq(1,nrow(num),by=2)),]
+pre_num <- num[-c(seq(2,nrow(num),by=2)),]
 
 pre <- matrix(0,16,6)
 
@@ -79,7 +75,7 @@ for (i in 1:16) {
 # -------------------------------------------------------
 
 #Post
-post_num <- num[-c(1,seq(2,nrow(num)-1,by=2)),]
+post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]
 
 post <- matrix(0,16,6)
 
