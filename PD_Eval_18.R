@@ -3,7 +3,7 @@
 
 setwd("/Users/scottmiller/Desktop/PD_18/Evals")
 dta <- read.csv("PD_18 Evals Full.csv")
-dta <- filter(dta, dta$School == "RTS") # change for each school
+dta <- filter(dta, dta$School == "Jouissant") # change for each school
 
 
 ## Part 1
