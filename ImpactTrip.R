@@ -1,10 +1,11 @@
-####################################
-##    Impact Trip 2018 - Summer   ##
-####################################
+###################################
+##    Impact Trip Evaluation     ##
+###################################
 
-setwd("/Users/scottmiller/Desktop/ImpactTrip_Summer_18/")
-dta <- read.csv("2018 Summer Impact Trip Data.csv")
+setwd("/Users/scottmiller/Desktop/ImpactTrip_19_Haiti/")
+dta <- read.csv("ImpactTrip_19_Haiti.csv")
 
+dta <- dta[,-1]
 
 ## Trip Process ##
 
@@ -81,11 +82,11 @@ avg1 <- avg1[-c(seq(2,18,by=2)),]
 
 dem <- matrix(0,8,8)
 
-dem.vars <- c(26:33)
+dem.vars <- c(28:35)
 
 for (i in dem.vars) {
   for (j in 0:7) {
-    dem[i-25,j+1] <- length(which(dta[,i]==j))
+    dem[i-27,j+1] <- length(which(dta[,i]==j))
   }
 }
 
@@ -111,6 +112,4 @@ for (i in seq(1,17,by=2)) {
 for (i in seq(1,17,by=2)) {
   print(cor.test(dta[,i+9], dta[,i+8], "greater", "spearman"))
 }
-
-# Not statistically significant:
 

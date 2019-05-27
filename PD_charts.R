@@ -1,5 +1,5 @@
 
-setwd("/Users/scottmiller/Desktop/PD_18/JOUISSANT/Rplots")
+setwd("/Users/scottmiller/Desktop/PD_18/TRESOR/Rplots")
 
 
 ##########################
@@ -190,7 +190,7 @@ colnames(pre_post8) <- c("Pre","Post")
 png("pp8.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 pp8 <- barplot(pre_post8, col= c("dimgrey","royalblue3","darkgrey","grey"), border="white", main = "", font.axis=1, beside=T,
-               ylim = c(0,120), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+               ylim = c(0,132), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(pp8, pre_post8 + 5, paste(pre_post8,"%",sep="") ,cex=1.9) 
 legend("top",
        legend = rownames(pre_post8), 

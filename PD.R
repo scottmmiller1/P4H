@@ -1,12 +1,12 @@
 
-setwd("/Users/scottmiller/Desktop/PD_18")
-dta <- read.csv("Exam Analysis/PD_18 Exam Data Full.csv")
+setwd("/Users/scottmiller/Desktop/PD_18/")
+dta <- read.csv("Data/Exam/PD_18 Exam Data Full.csv")
 library(tidyverse)
 
 
 dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
 dta1 <- dta1[,-c(22:23)] # new dataset with missing rows / cols removed
-dta1 <- filter(dta1, dta1$School == "JOUISSANT") # change for each school
+dta1 <- filter(dta1, dta1$School == "TRESOR") # change for each school
 
 num <- matrix(0,nrow(dta1),17)
 num[,1] <- dta1[,1]
