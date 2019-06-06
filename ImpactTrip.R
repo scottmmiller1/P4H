@@ -2,10 +2,10 @@
 ##    Impact Trip Evaluation     ##
 ###################################
 
-setwd("/Users/scottmiller/Desktop/ImpactTrip_19_Haiti/")
-dta <- read.csv("ImpactTrip_19_Haiti.csv")
+setwd("/Users/scottmiller/Desktop/ImpactTrip_19_Nica/")
+dta <- read.csv("ImpactTrip_19_Nica.csv")
 
-dta <- dta[,-1]
+dta <- dta[1:22,-1]
 
 ## Trip Process ##
 
@@ -99,17 +99,3 @@ for (i in seq(1,17,by=2)) {
   test[i,1] <- chisq.test(dta[,i+9], dta[,i+8])$p.value
   test[i,2] <- cor.test(dta[,i+9], dta[,i+8], "greater", "spearman")$p.value
 }
-View(test)
-
-
-for (i in seq(1,17,by=2)) {
-  print(chisq.test(dta[,i+9], dta[,i+8]))
-}
-
-# Not statistically significant:
-
-
-for (i in seq(1,17,by=2)) {
-  print(cor.test(dta[,i+9], dta[,i+8], "greater", "spearman"))
-}
-
