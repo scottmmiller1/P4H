@@ -1,9 +1,9 @@
 
 #library(tidyverse)
 
-setwd("/Users/scottmiller/Desktop/PD_18/Evals")
-dta <- read.csv("PD_18 Evals Full.csv")
-dta <- filter(dta, dta$School == "Jouissant") # change for each school
+setwd("/Users/scottmiller/Desktop/PD_19/Data/Evals")
+dta <- read.csv("PD_19 Evals Full.csv")
+dta <- filter(dta, dta$School == "Sonje") # change for each school
 
 
 ## Part 1

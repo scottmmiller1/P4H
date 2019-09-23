@@ -1,12 +1,12 @@
 
-setwd("/Users/scottmiller/Desktop/PD_18/")
-dta <- read.csv("Data/Exam/PD_18 Exam Data Full.csv")
+setwd("/Users/scottmiller/Desktop/PD_19/")
+dta <- read.csv("Data/Exam/PD_19 Exam Data Full.csv")
 library(tidyverse)
 
 
 dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
 dta1 <- dta1[,-c(22:23)] # new dataset with missing rows / cols removed
-dta1 <- filter(dta1, dta1$School == "TRESOR") # change for each school
+dta1 <- filter(dta1, dta1$School == "CIMA") # change for each school
 
 num <- matrix(0,nrow(dta1),17)
 num[,1] <- dta1[,1]
@@ -36,7 +36,6 @@ for (i in 1:nrow(num)) {
   }
 }
 
-
 # -------------------------------------------------------
 
 #overall
@@ -61,7 +60,6 @@ for (i in 1:16) {
   }
 }
 
-
 # Pre percent
 pre_pct <- matrix(0,16,6)
 
@@ -70,7 +68,6 @@ for (i in 1:16) {
     pre_pct[i,j+1] <- length(which(pre_num[,i+1]==j))/length(pre_num[,i+1]==j)
   }
 }
-
 
 # -------------------------------------------------------
 
@@ -84,7 +81,6 @@ for (i in 1:16) {
     post[i,j+1] <- length(which(post_num[,i+1]==j))
   }
 }
-
 
 # post percent
 post_pct <- matrix(0,16,6)
