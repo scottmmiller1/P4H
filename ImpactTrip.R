@@ -2,10 +2,14 @@
 ##    Impact Trip Evaluation     ##
 ###################################
 
-setwd("/Users/scottmiller/Desktop/ImpactTrip_19_Nica/")
-dta <- read.csv("ImpactTrip_19_Nica.csv")
+setwd("/Users/scottmiller/Desktop/ImpactTrip_Summer_19/")
+dta <- read.csv("/Users/scottmiller/Desktop/ImpactTrip_ALL.csv")
+library(tidyverse)
 
-dta <- dta[1:22,-1]
+
+dta <- filter(dta, dta$Trip == "2019 Summer") # change for each school
+dta <- dta[,-c(1:2)]
+
 
 ## Trip Process ##
 
@@ -82,11 +86,11 @@ avg1 <- avg1[-c(seq(2,18,by=2)),]
 
 dem <- matrix(0,8,8)
 
-dem.vars <- c(28:35)
+dem.vars <- c(26:32)
 
 for (i in dem.vars) {
   for (j in 0:7) {
-    dem[i-27,j+1] <- length(which(dta[,i]==j))
+    dem[i-25,j+1] <- length(which(dta[,i]==j))
   }
 }
 

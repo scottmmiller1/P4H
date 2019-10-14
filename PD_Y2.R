@@ -1,22 +1,22 @@
 
-setwd("/Users/scottmiller/Desktop/PD_19/")
-dta <- read.csv("Data/Exam/PD_19 Exam Data Full.csv")
+setwd("/Users/scottmiller/Desktop/PD_19/Year 2/")
+dta <- read.csv("Data/Exam/PD_19_Y2 Exam Data Full.csv")
 library(tidyverse)
 
 
 dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
 dta1 <- dta1[,-c(22:23)] # new dataset with missing rows / cols removed
-dta1 <- filter(dta1, dta1$School == "CIMA") # change for each school
+dta1 <- filter(dta1, dta1$School == "ST MARC") # change for each school
 
-num <- matrix(0,nrow(dta1),17)
+num <- matrix(0,nrow(dta1),16)
 num[,1] <- dta1[,1]
 
 # label answer choices
 for (i in 1:nrow(num)) {
-  for (j in 6:21) {
-    if (dta1[i,j] == "v") {
+  for (j in 6:20) {
+    if (dta1[i,j] == "D") {
       num[i,j-4] <- 1
-    } else if (dta1[i,j] == "f") {
+    } else if (dta1[i,j] == "PD") {
       num[i,j-4] <- 2
     } else if (dta1[i,j] == "bon") {
       num[i,j-4] <- 1
@@ -39,9 +39,9 @@ for (i in 1:nrow(num)) {
 # -------------------------------------------------------
 
 #overall
-answers <- matrix(0,16,6)
+answers <- matrix(0,15,6)
 
-for (i in 1:16) {
+for (i in 1:15) {
   for (j in 0:5) {
     answers[i,j+1] <- length(which(num[,i+1]==j))
   }
@@ -52,18 +52,18 @@ for (i in 1:16) {
 #Pre
 pre_num <- num[-c(seq(2,nrow(num),by=2)),]
 
-pre <- matrix(0,16,6)
+pre <- matrix(0,15,6)
 
-for (i in 1:16) {
+for (i in 1:15) {
   for (j in 0:5) {
     pre[i,j+1] <- length(which(pre_num[,i+1]==j))
   }
 }
 
 # Pre percent
-pre_pct <- matrix(0,16,6)
+pre_pct <- matrix(0,15,6)
 
-for (i in 1:16) {
+for (i in 1:15) {
   for (j in 0:5) {
     pre_pct[i,j+1] <- length(which(pre_num[,i+1]==j))/length(pre_num[,i+1]==j)
   }
@@ -74,18 +74,18 @@ for (i in 1:16) {
 #Post
 post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]
 
-post <- matrix(0,16,6)
+post <- matrix(0,15,6)
 
-for (i in 1:16) {
+for (i in 1:15) {
   for (j in 0:5) {
     post[i,j+1] <- length(which(post_num[,i+1]==j))
   }
 }
 
 # post percent
-post_pct <- matrix(0,16,6)
+post_pct <- matrix(0,15,6)
 
-for (i in 1:16) {
+for (i in 1:15) {
   for (j in 0:5) {
     post_pct[i,j+1] <- length(which(post_num[,i+1]==j))/length(post_num[,i+1]==j)
   }
