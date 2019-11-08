@@ -1,6 +1,6 @@
 
-setwd("/Users/scottmiller/Desktop/PD_19/")
-dta <- read.csv("Data/Exam/PD_19 Exam Data Full.csv")
+setwd("/Users/scottmiller/Desktop/PD_18/")
+dta <- read.csv("Data/Exam/PD_18 Exam Data Full.csv")
 library(tidyverse)
 
 

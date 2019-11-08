@@ -669,5 +669,78 @@ text(y = e4, (eval[4,]/sum(eval[4,]))*100 + 5, paste(round((eval[4,]/sum(eval[4,
 par(op) ## reset
 dev.off() 
 
+sum(eval[1,])
+sum(eval[2,])
+sum(eval[3,])
+sum(eval[4,])
 
+## demographics
+
+# Gender
+gender <- round(c(dem1[1,2:3]) / sum(dem1[1,2:3]), digits = 2)*100 
+
+png("dem11.png", width = 700) 
+pie(gender, labels = paste(gender,"%",sep=""), col= c("royalblue3","firebrick2"), 
+    cex = 2, radius = .7, clockwise = T)
+legend("top", legend = c("Male","Female"), 
+       fill = c("royalblue3","firebrick2"),
+       horiz = T, cex = 1.2, yjust = 2)
+dev.off() 
+
+sum(dem1[1,])
+
+# Age
+age <- round(c(dem1[2,2:7]) / sum(dem1[2,2:7]), digits = 2)*100 
+
+png("dem12.png", width = 700) 
+pie(age, labels = paste(c("",age[2:4],""),c("",rep("%",3),""),sep=""), 
+    col= c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"), 
+    cex = 2, radius = .7, clockwise = T)
+legend("top", legend = c("< 18","18-24","25-34","35-44","45-54","55-64"), 
+       fill = c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"),
+       horiz = T, cex = 1.2, yjust = 1)
+dev.off() 
+
+sum(dem1[2,])
+
+# Education
+edu <- round(c(dem1[3,2:5]) / sum(dem1[3,2:5]), digits = 2)*100 
+
+png("dem13.png", width = 700) 
+pie(edu, labels = paste(edu,"%",sep=""), 
+    col= c("grey","royalblue3","gray48","firebrick2"), 
+    cex = 2, radius = .7, clockwise = T)
+legend("top", legend = c("Primary","Secondary","Some University","University"), 
+       fill = c("grey","royalblue3","gray48","firebrick2"),
+       horiz = T, cex = 1.2, yjust = 2)
+dev.off() 
+
+sum(dem1[3,])
+
+
+# Prior Training
+train <- round(c(dem1[7,2:3]) / sum(dem1[7,2:3]), digits = 2)*100 
+
+png("dem16.png", width = 700) 
+pie(train, labels = paste(train,"%",sep=""), col= c("royalblue3","firebrick2"), 
+    cex = 2, radius = .7, clockwise = T, main = "Prior Training")
+legend("top", legend = c("Yes","No"), 
+       fill = c("royalblue3","firebrick2"),
+       horiz = T, cex = 1.2, yjust = 2)
+dev.off() 
+
+sum(dem1[7,])
+
+# P4H Training
+p4h <- round(c(dem1[8,2:3]) / sum(dem1[8,2:3]), digits = 2)*100 
+
+png("dem17.png", width = 700) 
+pie(p4h, labels = paste(p4h,"%",sep=""), col= c("royalblue3","firebrick2"), 
+    cex = 2, radius = .7, clockwise = T, main = "P4H Training")
+legend("top", legend = c("Yes","No"), 
+       fill = c("royalblue3","firebrick2"),
+       horiz = T, cex = 1.2, yjust = 2)
+dev.off() 
+
+sum(dem1[8,])
 
