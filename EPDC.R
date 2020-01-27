@@ -1,10 +1,10 @@
-####################
-##    EPDC 2018   ##
-####################
+################
+##    EPDC    ##
+################
 
-setwd("/Users/scottmiller/Desktop/EPDC_18/")
-dta <- read.csv("EPDC2018.csv", header = T)
-dta[dta == 88] <- NA
+setwd("/Users/scottmiller/Desktop/EPDC_19/")
+dta <- read.csv("EPDC2019.csv", header = T)
+
 
 ## Demographics ##
 
