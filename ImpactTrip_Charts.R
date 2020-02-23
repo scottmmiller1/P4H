@@ -1,5 +1,5 @@
 
-setwd("/Users/scottmiller/Desktop/ImpactTrip_Summer_19/Rplots")
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/ImpactTrip/ImpactTrip_UF_Haiti_ALL/Rplots")
 
 
 ### Run ImpactTrip.R prior to this section
@@ -23,20 +23,20 @@ dev.off()
 
 
 # College Status
-college <- round(c(dem[2,2:7]) / sum(dem[2,2:7]), digits = 2)*100 
+college <- round(c(dem[2,2:6]) / sum(dem[2,2:6]), digits = 2)*100 
 
 png("dem2.png", width = 700) 
 pie(college, labels = paste(college,"%",sep=""), 
     col= c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"), 
     cex = 2, radius = .7, clockwise = T)
-legend("top", legend = c("Freshman","Sophomore","Junior","Senior","Gradute","Faculty"),
+legend("top", legend = c("Freshman","Sophomore","Junior","Senior","Gradute"),
        fill = c("darkorchid4","grey","firebrick2","royalblue3","gray48","green4"),
        horiz = T, cex = 1,yjust = 1)
 dev.off() 
 
 
 # Race
-race <- round(c(dem[4,3:6]) / sum(dem[4,3:6]), digits = 2)*100 
+race <- round(c(dem[4,c(3:6)]) / sum(dem[4,c(3:6)]), digits = 2)*100 
 
 png("dem3.png", width = 700) 
 pie(race, labels = paste(race,"%",sep=""), 
@@ -85,7 +85,7 @@ dev.off()
 # Summary
 
 # avg. growth
-avg1 <- round(avg1, digits = 2)
+avg1 <- round(avg, digits = 2)
 rownames(avg1) <- c("Culture","Aid","Poverty","Operate","Critical Thinking","Career","Perform","Team Connection","Local Connection")
 
 png("avg_growth.png", width = 700) 
@@ -144,23 +144,32 @@ dev.off()
 
 # ---------------------------------------------------
 # BA Charts
+BA.questions <- c(1:18)
+diff.questions <-  c(1:9)
 
-d <- diff1[,4:9]
+# convert to percentages
+for (i in BA.questions) {
+  BA[i,] <- (BA[i,]/sum(BA[i,]))*100
+}
+colnames(BA) <- c("Very Low","Low","Medium","High","Very High")
+rownames(BA) <- rep(c("Before","After"),length(diff.questions))
+
+d <- matrix(0,length(diff.questions),6)
+for (i in diff.questions) {
+  d[i,] <- (diff[i,4:9]/sum(diff[i,4:9]))*100
+}
 colnames(d) <- c("-1 Unit","0 Units","1 Unit","2 Units","3 Units","4 Units")
 
+
+
 # 1
-
-B_A1 <- BA1[1:2,]
-colnames(B_A1) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A1) <- c("Before","After")
-
 png("b1.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b1 <- barplot(B_A1, col= c("royalblue3","firebrick2"), border="white", 
+b1 <- barplot(BA[1:2,], col= c("royalblue3","firebrick2"), border="white", 
               main = "History & Culture", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A1), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[1:2,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -168,28 +177,23 @@ dev.off()
 
 png("c1.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c1 <- barplot((d[1,]/sum(d[1,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c1 <- barplot(d[1,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in History & Culture", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c1, (d[1,]/sum(d[1,]))*100 + 4, paste(round((d[1,]/sum(d[1,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c1, d[1,] + 4, paste(round(d[1,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 # 2
-
-B_A2 <- BA1[3:4,]
-colnames(B_A2) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A2) <- c("Before","After")
-
 png("b2.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b2 <- barplot(B_A2, col= c("royalblue3","firebrick2"), border="white", 
+b2 <- barplot(BA[3:4,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Effective Aid Practices", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A2), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[3:4,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -197,28 +201,23 @@ dev.off()
 
 png("c2.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c2 <- barplot((d[2,]/sum(d[2,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c2 <- barplot(d[2,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Effective Aid Practices", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c2, (d[2,]/sum(d[2,]))*100 + 4, paste(round((d[2,]/sum(d[2,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c2, d[2,] + 4, paste(round(d[2,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 # 3
-
-B_A3 <- BA1[5:6,]
-colnames(B_A3) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A3) <- c("Before","After")
-
 png("b3.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b3 <- barplot(B_A3, col= c("royalblue3","firebrick2"), border="white", 
+b3 <- barplot(BA[5:6,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Understanding of Poverty", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A3), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[5:6,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -226,28 +225,23 @@ dev.off()
 
 png("c3.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c3 <- barplot((d[3,]/sum(d[3,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c3 <- barplot(d[3,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Understanding of Poverty", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c3, (d[3,]/sum(d[3,]))*100 + 4, paste(round((d[3,]/sum(d[3,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c3, d[3,] + 4, paste(round(d[3,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 # 4
-
-B_A4 <- BA1[7:8,]
-colnames(B_A4) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A4) <- c("Before","After")
-
 png("b4.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b4 <- barplot(B_A4, col= c("royalblue3","firebrick2"), border="white", 
+b4 <- barplot(BA[7:8,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Ability to Operate", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A4), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[7:8,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -255,28 +249,23 @@ dev.off()
 
 png("c4.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c4 <- barplot((d[4,]/sum(d[4,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c4 <- barplot(d[4,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Ability to Operate", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c4, (d[4,]/sum(d[4,]))*100 + 4, paste(round((d[4,]/sum(d[4,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c4, d[4,] + 4, paste(round(d[4,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 # 5
-
-B_A5 <- BA1[9:10,]
-colnames(B_A5) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A5) <- c("Before","After")
-
 png("b5.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b5 <- barplot(B_A5, col= c("royalblue3","firebrick2"), border="white", 
+b5 <- barplot(BA[9:10,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Critical Thinking", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A5), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[9:10,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -284,28 +273,23 @@ dev.off()
 
 png("c5.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c5 <- barplot((d[5,]/sum(d[5,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c5 <- barplot(d[5,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Critical Thinking", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c5, (d[5,]/sum(d[5,]))*100 + 4, paste(round((d[5,]/sum(d[5,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c5, d[5,] + 4, paste(round(d[5,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 #6
-
-B_A6 <- BA1[11:12,]
-colnames(B_A6) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A6) <- c("Before","After")
-
 png("b6.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b6 <- barplot(B_A6, col= c("royalblue3","firebrick2"), border="white", 
+b6 <- barplot(BA[11:12,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Career Trajectory", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A6), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[11:12,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -313,28 +297,23 @@ dev.off()
 
 png("c6.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c6 <- barplot((d[6,]/sum(d[6,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c6 <- barplot(d[6,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Career Trajectory", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c6, (d[6,]/sum(d[6,]))*100 + 4, paste(round((d[6,]/sum(d[6,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c6, d[6,] + 4, paste(round(d[6,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 #7
-
-B_A7 <- BA1[11:12,]
-colnames(B_A7) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A7) <- c("Before","After")
-
 png("b7.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b7 <- barplot(B_A7, col= c("royalblue3","firebrick2"), border="white", 
+b7 <- barplot(BA[13:14,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Ability to Perform", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A7), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[13:14,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -342,28 +321,23 @@ dev.off()
 
 png("c7.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c7 <- barplot((d[7,]/sum(d[7,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c7 <- barplot(d[7,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Ability to Perform", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c7, (d[7,]/sum(d[7,]))*100 + 4, paste(round((d[7,]/sum(d[7,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c7, d[7,] + 4, paste(round(d[7,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 #8
-
-B_A8 <- BA1[11:12,]
-colnames(B_A8) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A8) <- c("Before","After")
-
 png("b8.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b8 <- barplot(B_A8, col= c("royalblue3","firebrick2"), border="white", 
+b8 <- barplot(BA[15:16,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Team Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A8), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[15:16,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -371,28 +345,23 @@ dev.off()
 
 png("c8.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c8 <- barplot((d[8,]/sum(d[8,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c8 <- barplot(d[8,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Team Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c8, (d[8,]/sum(d[8,]))*100 + 4, paste(round((d[8,]/sum(d[8,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c8, d[8,] + 4, paste(round(d[8,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
 
 #9
-
-B_A9 <- BA1[11:12,]
-colnames(B_A9) <- c("Very Low","Low","Medium","High","Very High")
-rownames(B_A9) <- c("Before","After")
-
 png("b9.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
-b9 <- barplot(B_A9, col= c("royalblue3","firebrick2"), border="white", 
+b9 <- barplot(BA[17:18,], col= c("royalblue3","firebrick2"), border="white", 
               main = "Haitian Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
-              ylim = c(0,15), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-legend("top", legend = rownames(B_A9), 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+legend("top", legend = rownames(BA[17:18,]), 
        fill = c("royalblue3","firebrick2"),
        horiz = T, cex = 1.5)
 par(op) ## reset
@@ -400,11 +369,11 @@ dev.off()
 
 png("c9.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
-c9 <- barplot((d[9,]/sum(d[9,]))*100, names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
+c9 <- barplot(d[9,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
               main = "Change in Haitian Connection", cex.main = 2,
               font.main = 1, font.axis=1, beside=T, space = 1,
-              ylim = c(0,60), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
-text(c9, (d[9,]/sum(d[9,]))*100 + 4, paste(round((d[9,]/sum(d[9,]))*100,digits = 0),"%",sep="") ,cex=1.9) 
+              ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
+text(c9, d[9,] + 4, paste(round(d[9,],digits = 0),"%",sep="") ,cex=1.9) 
 par(op) ## reset
 dev.off() 
 
@@ -498,24 +467,42 @@ dev.off()
 
 # --------------
 
-# Number of Responses
+# Pre-loaded data
 
-# demographics
-for (i in 1:5) {
-  print(sum(dem[i,]))
-}
-
-# demographics
+# obs data
+n.obs <- matrix(0,9,3)
+# BA 
 for (i in 1:9) {
-  print(sum(diff1[i,]))
+  n.obs[i,1] <- sum(diff[i,])
 }
-
-# demographics
+# eval
 for (i in 1:6) {
-  print(sum(trip[i,]))
+  n.obs[i,2] <- sum(eval[i,])
+}
+# dem
+for (i in c(1:7)) {
+  n.obs[i,3] <- sum(dem[i,])
 }
 
+write.table(n.obs,"nobs.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
+# difference data
+d <- round(d,digits = 0)
+write.table(d, "diff.txt",sep=",",row.names=FALSE,col.names =FALSE)
+
+# avg growth data
+avg <- round(avg[,3],digits = 2)
+write.table(avg,"avg.txt",sep=",",row.names=FALSE,col.names =FALSE)
+
+# eval data
+evalpct <- round(evalpct*100,digits = 0)
+write.table(evalpct,"eval.txt",sep=",",row.names=FALSE,col.names =FALSE)
+
+# dem data
+for (i in 1:7) {
+  dem[i,] <- round((dem[i,]/sum(dem[i,]))*100,digits = 0)
+}
+write.table(dem,"dem.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 
 

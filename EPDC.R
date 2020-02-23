@@ -12,11 +12,11 @@ dta <- read.csv("EPDC2019.csv", header = T)
 
 dem <- matrix(0,10,7)  
 
-q.dem <- c(20:29)
+q.dem <- c(24:33)
 
 for (i in q.dem) {
   for (j in 0:6) {
-    dem[i-19,j+1] <- length(which(dta[,i]==j))
+    dem[i-23,j+1] <- length(which(dta[,i]==j))
   }
 }
 
@@ -31,12 +31,12 @@ mean(dta[,26],na.rm = T); sd(dta[,26],na.rm = T); range(dta[,26],na.rm = T)
 
 ## Conference Evaluation ##
 
-eval <- matrix(0,7,5)
-q.eval <- c(13:19)
+eval <- matrix(0,9,5)
+q.eval <- c(15:23)
 
 for (i in q.eval) {
   for (j in 1:5) {
-    eval[i-12,j] <- length(which(dta[,i]==j))
+    eval[i-14,j] <- length(which(dta[,i]==j))
   }
 }
 
@@ -44,7 +44,7 @@ evalpct <- matrix(0,9,5)
 
 for (i in q.eval) {
   for (j in 1:5) {
-    evalpct[i-12,j] <- length(which(dta[,i]==j))/length(dta[,i])
+    evalpct[i-14,j] <- length(which(dta[,i]==j))/length(dta[,i])
   }
 }
 
@@ -53,8 +53,8 @@ for (i in q.eval) {
 ## Conference Impact ##
 
 ## before / after table
-BA <- matrix(0,12,5)
-q.BA <- c(1:12)
+BA <- matrix(0,14,5)
+q.BA <- c(1:14)
 
 for (i in q.BA) {
   for (j in 1:5) {
@@ -64,8 +64,8 @@ for (i in q.BA) {
 
 ## difference table
 
-diff <- matrix(0,12,9)
-q.diff <- seq(2,12,by=2)
+diff <- matrix(0,14,9)
+q.diff <- seq(2,14,by=2)
 
 for (i in q.diff) {
   for (j in -4:4) {
@@ -76,15 +76,15 @@ diff <- diff[-q.diff,]
 
 ## Average before/after/difference
 
-avg <- matrix(0,12,3)
+avg <- matrix(0,14,3)
 
 #before
-q.before <- seq(1,11,by=2)
+q.before <- seq(1,13,by=2)
 for (i in q.before) {
   avg[i,1] <- mean(dta[,i],na.rm = T) 
 }
 #after
-q.after <- seq(2,12,by=2)
+q.after <- seq(2,14,by=2)
 for (i in q.after) {
   avg[i-1,2] <- mean(dta[,i],na.rm = T) 
 }

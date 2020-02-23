@@ -2,35 +2,35 @@
 ##    Impact Trip Evaluation     ##
 ###################################
 
-setwd("/Users/scottmiller/Desktop/ImpactTrip_Summer_19/")
-dta <- read.csv("/Users/scottmiller/Desktop/ImpactTrip_ALL.csv")
+setwd("/Users/scottmiller/Desktop/ImpactTrip_Winter_19/")
+dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/ImpactTrip/ImpactTrip_UF_Haiti_ALL/ImpactTrip_UF_Haiti_ALL.csv")
 library(tidyverse)
 
 
-dta <- filter(dta, dta$Trip == "2019 Summer") # change for each school
+#dta <- filter(dta, dta$Trip == "2019 Winter") # change for each school
 dta <- dta[,-c(1:2)]
 
 
 ## Trip Process ##
 
 #overall
-trip <- matrix(0,6,5)
+eval <- matrix(0,6,5)
 
-trip.vars <- c(1:6)
+eval.vars <- c(1:6)
 
 for (i in trip.vars) {
   for (j in 1:5) {
-    trip[i,j] <- length(which(dta[,i]==j))
+    eval[i,j] <- length(which(dta[,i]==j))
   }
 }
 
 
 #percentage
-trip1pct <- matrix(0,6,5)
+evalpct <- matrix(0,6,5)
 
-for (i in trip.vars) {
+for (i in eval.vars) {
   for (j in 1:5) {
-    trip1pct[i,j] <- length(which(dta[,i]==j))/length(dta[,i]==j)
+    evalpct[i,j] <- length(which(dta[,i]==j))/length(dta[,i]==j)
   }
 }
 
@@ -42,44 +42,44 @@ summary(dta$X7)
 ## Impact ##
 
 ## before / after table
-BA1 <- matrix(0,18,5)
+BA <- matrix(0,18,5)
 
 ba.vars <- c(8:25)
 
 for (i in ba.vars) {
   for (j in 1:5) {
-    BA1[i-7,j] <- length(which(dta[,i]==j))
+    BA[i-7,j] <- length(which(dta[,i]==j))
   }
 }
 
 
 ## difference table
 
-diff1 <- matrix(0,18,9)
+diff <- matrix(0,18,9)
 
 diff.vars <- seq(9,25,by=2)
 
 for (i in diff.vars) {
   for (j in -4:4) {
-    diff1[i-8,j+5] <- length(which(dta[,i]-dta[,i-1]==j))
+    diff[i-8,j+5] <- length(which(dta[,i]-dta[,i-1]==j))
   }
 }
-diff1 <- diff1[-c(seq(2,18,by=2)),]
+diff <- diff[-c(seq(2,18,by=2)),]
 
 
 ## Average before/after/difference
 
-avg1 <- matrix(0,18,3)
+avg <- matrix(0,18,3)
 
 #before
 for (i in diff.vars) {
-  avg1[i-8,1] <- mean(dta[,i-1],na.rm = T) 
+  avg[i-8,1] <- mean(dta[,i-1],na.rm = T) 
   #after
-  avg1[i-8,2] <- mean(dta[,i],na.rm = T) 
+  avg[i-8,2] <- mean(dta[,i],na.rm = T) 
   #difference
-  avg1[i-8,3] <- mean(dta[,i]-dta[,i-1],na.rm = T) 
+  avg[i-8,3] <- mean(dta[,i]-dta[,i-1],na.rm = T) 
 }
-avg1 <- avg1[-c(seq(2,18,by=2)),]
+avg <- avg[-c(seq(2,18,by=2)),]
 
 
 ## Demographics ##

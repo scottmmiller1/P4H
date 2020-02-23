@@ -1,8 +1,8 @@
 
 #library(tidyverse)
 
-setwd("/Users/scottmiller/Desktop/")
-dta <- read.csv("PD_Y1 Evals Full.csv")
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/PD/PD_19/Year 1/Data/Evals/")
+dta <- read.csv("PD_19 Evals Full.csv")
 #dta <- filter(dta, dta$School == "Sonje") # change for each school
 
 
@@ -20,15 +20,15 @@ for (i in BA.questions) {
 
 
 ## difference table
-diff1 <- matrix(0,12,9)
+diff <- matrix(0,12,9)
 A.questions <- seq(4,14,by=2)
 
 for (i in A.questions) {
   for (j in -4:4) {
-    diff1[i-2,j+5] <- length(which(dta[,i]-dta[,i-1]==j))
+    diff[i-2,j+5] <- length(which(dta[,i]-dta[,i-1]==j))
   }
 }
-diff1 <- diff1[-c(seq(1,11,by=2)),]
+diff <- diff[-c(seq(1,11,by=2)),]
 
 
 ## Average before/after/difference
@@ -77,12 +77,12 @@ for (i in p2.questions) {
 #-----------------------------------------
 ## Part 3
 
-dem1 <- matrix(0,8,7)  
+dem <- matrix(0,8,7)  
 p3.questions <- c(19:26)
 
 for (i in p3.questions) {
   for (j in 0:6) {
-    dem1[i-18,j+1] <- length(which(dta[,i]==j))
+    dem[i-18,j+1] <- length(which(dta[,i]==j))
   }
 }
 
