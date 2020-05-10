@@ -5,9 +5,9 @@
 ################################################################
 
 
-setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/PD/PD_20/Year 1/RMI/Rplots")
-dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/Analysis/PD/PD_20/Year 1/Data/PD_20 Evals Full.csv")
-dta <- filter(dta, dta$School == "RMI") # change for each school
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rplots")
+dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Evals Full.csv")
+dta <- filter(dta, dta$School == "MENFP") # change for each school
 
 
 ## Part 1
@@ -458,13 +458,6 @@ dev.off()
 
 
 # ----------------------------------------------
-
-n.obs <- matrix(0,16,4)
-
-#Exam 
-for (i in 1:16) {
-  n.obs[i,1] <- sum(post[i,])
-}
 # BA 
 for (i in 1:6) {
   n.obs[i,2] <- sum(diff[i,])
@@ -479,34 +472,26 @@ for (i in c(1:8)) {
 }
 
 # obs data
-write.table(n.obs,"nobs.txt",sep=",",row.names=FALSE,col.names =FALSE)
-
-# exam data
-# pre
-pre <- round((pre_pct*100),digits = 0)
-write.table(pre,"pre.txt",sep=",",row.names=FALSE,col.names =FALSE)
-# pre
-post <- round((post_pct*100),digits = 0)
-write.table(post,"post.txt",sep=",",row.names=FALSE,col.names =FALSE)
+write.table(n.obs,"Values/nobs.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 
 # difference data
 d <- round(d,digits = 0)
-write.table(d,"diff.txt",sep=",",row.names=FALSE,col.names =FALSE)
+write.table(d,"Values/diff.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 # eval data
 avg <- round(avg1[,3],digits = 2)
-write.table(avg,"avg.txt",sep=",",row.names=FALSE,col.names =FALSE)
+write.table(avg,"Values/avg.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 # eval data
 evalpct <- round(evalpct*100,digits = 0)
-write.table(evalpct,"eval.txt",sep=",",row.names=FALSE,col.names =FALSE)
+write.table(evalpct,"Values/eval.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 # dem data
 for (i in 1:8) {
   dem[i,] <- round((dem[i,]/sum(dem[i,]))*100,digits = 0)
 }
 dem[5,1:3] <- round(rbind(mean(dta$X14, na.rm = T),mean(dta$X15, na.rm = T),mean(dta$X16, na.rm = T)),digits=1)
-write.table(dem,"dem.txt",sep=",",row.names=FALSE,col.names =FALSE)
+write.table(dem,"Values/dem.txt",sep=",",row.names=FALSE,col.names =FALSE)
 
 
