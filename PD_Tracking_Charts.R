@@ -3,8 +3,8 @@ setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_Tacking/All/Rplots
 dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_Tacking/All/PD_All_collapse.csv")
 
 
-train <- c("Mission of Hope","Ecole St Marc","Harvy","CEFCAP","Hope for Haiti","RTS","Joseph School",
-           "TRESOR","Jouissant","Dondon","OEDP","CFC Kenscoff","Sonje Ayiti","Laby","CFC Gonaives")
+train <- c("Jul. 16, 2018","Jul. 23, 2018","Aug. 2, 2018","Sep. 29, 2018","Oct. 5, 2018","Dec. 10, 2018","Dec. 13, 2018",
+           "Jan. 22, 2019","Mar 6, 2019","Apr. 15, 2019","May 27, 2019","Jul. 8, 2019","Jul. 29, 2019","Aug. 20, 2019","Aug. 28, 2019")
 
 # Overall Average
 dta$Pre[dta$school=="Mission of Hope"] <- .42; dta$Post[dta$school=="Mission of Hope"] <- .83
