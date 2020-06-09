@@ -49,47 +49,19 @@ for (i in 1:nrow(num)) {
   }
 }
 
-# Element count function
-# -------------------------------------------------------
-# Count the number of times each answer was used
-# results in a `quest'X`choices' matrix 
-  # quest and choices must be numeric
-    # Each represents the relevant number of questions and answer choices
-  # data is a matrix or dataframe of numeric answers
-  # results is the name of the resulting matrix
-  # percent = TRUE will calculate the percentage of responses for each answer choice
-    # percent == FALSE by default
-
-el_count <- function(quest,choices,data,results,percent = FALSE) {
-  results <- matrix(0,quest,choices+1)
-  if (percent == FALSE) {
-    for (i in 1:quest) {
-      for (j in 0:choices) {
-        results[i,j+1] <- length(which(data[,i+1]==j))
-      }
-    }
-    print(results)
-  } else {
-    for (i in 1:quest) {
-      for (j in 0:choices) {
-        results[i,j+1] <- length(which(data[,i+1]==j))/length(data[,i+1]==j)
-      }
-    }
-    print(results)
-  }
-}
-# -------------------------------------------------------
+# Call element count function
+source("/Users/scottmiller/GitHub/P4H/elem_count.R")
 
 
 #overall
-answers <- el_count(quest = 16, choices = 5, data = pre_num, results = answers, percent = FALSE)
+answers <- elem_count(quest = 16, choices = 5, data = num[,-1], results = answers, percent = FALSE)
 
 
 #Pre
   # data set with only pre-test responses
   pre_num <- num[-c(seq(2,nrow(num),by=2)),]
-pre <- el_count(quest = 16, choices = 5, data = pre_num, results = pre, percent = FALSE)
-pre_pct <- el_count(quest = 16, choices = 5, data = pre_num, results = pre, percent = TRUE)
+pre <- elem_count(quest = 16, choices = 5, data = pre_num[,-1], results = pre, percent = FALSE)
+pre_pct <- elem_count(quest = 16, choices = 5, data = pre_num[,-1], results = pre, percent = TRUE)
 
 
 # -------------------------------------------------------
@@ -97,8 +69,8 @@ pre_pct <- el_count(quest = 16, choices = 5, data = pre_num, results = pre, perc
 #Post
   # data set with only post-test responses
   post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]
-post <- el_count(quest = 16, choices = 5, data = post_num, results = post, percent = FALSE)
-post_pct <- el_count(quest = 16, choices = 5, data = post_num, results = post, percent = TRUE)
+post <- elem_count(quest = 16, choices = 5, data = post_num[,-1], results = post, percent = FALSE)
+post_pct <- elem_count(quest = 16, choices = 5, data = post_num[,-1], results = post, percent = TRUE)
 
 
 

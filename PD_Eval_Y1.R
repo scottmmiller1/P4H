@@ -9,18 +9,15 @@ setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rp
 dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Evals Full.csv")
 dta <- filter(dta, dta$School == "MENFP") # change for each school
 
+# Call element count function
+source("/Users/scottmiller/GitHub/P4H/elem_count.R")
+
 
 ## Part 1
 
 ## before / after table
-BA1 <- matrix(0,12,5)
-BA.questions <- c(3:14) 
-
-for (i in BA.questions) {
-  for (j in 1:5) {
-    BA1[i-2,j] <- length(which(dta[,i]==j))
-  }
-}
+BA.data <- dta[,3:14] 
+BA1 <- elem_count(quest = 12, choices = 5, data = BA.data, percent = FALSE)
 
 
 ## difference table
@@ -58,37 +55,16 @@ avg1 <- avg1[-c(seq(2,12,by=2)),]
 ## Part 2
 
 #overall
-eval <- matrix(0,4,5)
-p2.questions <- c(15:18)
+p2.data <- dta[,15:18]
+eval <- elem_count(quest = 4, choices = 5, data = p2.data, percent = FALSE)
+evalpct <- elem_count(quest = 4, choices = 5, data = p2.data, percent = TRUE)
 
-for (i in p2.questions) {
-  for (j in 1:5) {
-    eval[i-14,j] <- length(which(dta[,i]==j))
-  }
-}
-
-
-#percentage
-evalpct <- matrix(0,6,5)
-
-for (i in p2.questions) {
-  for (j in 1:5) {
-    evalpct[i-14,j] <- length(which(dta[,i]==j))/length(dta[,i]==j)
-  }
-}
 
 
 #-----------------------------------------
 ## Part 3
-
-dem <- matrix(0,8,7)  
-p3.questions <- c(19:26)
-
-for (i in p3.questions) {
-  for (j in 0:6) {
-    dem[i-18,j+1] <- length(which(dta[,i]==j))
-  }
-}
+p3.data <- dta[,19:26] 
+dem <- elem_count(quest = 8, choices = 6, data = p3.data, percent = FALSE)
 
 
 # Experience
