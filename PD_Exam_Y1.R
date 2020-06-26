@@ -7,7 +7,12 @@
 
 setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rplots")
 dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Exam Data Full.csv")
+
+## packages
 library(tidyverse)
+library(ggplot2)
+  # element count function
+source("/Users/scottmiller/GitHub/P4H/elem_count.R")
 
 
 dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
@@ -49,19 +54,16 @@ for (i in 1:nrow(num)) {
   }
 }
 
-# Call element count function
-source("/Users/scottmiller/GitHub/P4H/elem_count.R")
-
 
 #overall
-answers <- elem_count(quest = 16, choices = 5, data = num[,-1], results = answers, percent = FALSE)
+answers <- elem_count(data = num[,-1],quest = 16, choices = 5, percent = FALSE)
 
 
 #Pre
   # data set with only pre-test responses
   pre_num <- num[-c(seq(2,nrow(num),by=2)),]
-pre <- elem_count(quest = 16, choices = 5, data = pre_num[,-1], results = pre, percent = FALSE)
-pre_pct <- elem_count(quest = 16, choices = 5, data = pre_num[,-1], results = pre, percent = TRUE)
+pre <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = FALSE)
+pre_pct <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = TRUE)
 
 
 # -------------------------------------------------------
@@ -69,8 +71,8 @@ pre_pct <- elem_count(quest = 16, choices = 5, data = pre_num[,-1], results = pr
 #Post
   # data set with only post-test responses
   post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]
-post <- elem_count(quest = 16, choices = 5, data = post_num[,-1], results = post, percent = FALSE)
-post_pct <- elem_count(quest = 16, choices = 5, data = post_num[,-1], results = post, percent = TRUE)
+post <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = FALSE)
+post_pct <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = TRUE)
 
 
 
@@ -82,7 +84,9 @@ post_pct <- elem_count(quest = 16, choices = 5, data = post_num[,-1], results = 
 # Growth %
 
 n.quest <- 16
-growth <- t(c(rep(0,n.quest)))
+growth <- matrix(0,16,3)
+correct <- num
+correct <- cbind(dta1[,2],correct) 
 
 # group questions by correct answer
 true.A <- c(5,7,9)
@@ -93,32 +97,104 @@ E <- c(16)
 
 # true / A
 for (i in true.A) {
-  growth[i] <- round(post_pct[i,2] - pre_pct[i,2], digits = 2)*100
+  growth[i,1] <- round(pre_pct[i,2], digits = 2)*100
+  growth[i,2] <- round(post_pct[i,2], digits = 2)*100
+  growth[i,3] <- round(post_pct[i,2] - pre_pct[i,2], digits = 2)*100
 }
 # false / B
 for (i in false.B) {
-  growth[i] <- round(post_pct[i,3] - pre_pct[i,3], digits = 2)*100
+  growth[i,1] <- round(pre_pct[i,3], digits = 2)*100
+  growth[i,2] <- round(post_pct[i,3], digits = 2)*100
+  growth[i,3] <- round(post_pct[i,3] - pre_pct[i,3], digits = 2)*100
 }
 # C
 for (i in C) {
-  growth[i] <- round(post_pct[i,4] - pre_pct[i,4], digits = 2)*100
+  growth[i,1] <- round(pre_pct[i,4], digits = 2)*100
+  growth[i,2] <- round(post_pct[i,4], digits = 2)*100
+  growth[i,3] <- round(post_pct[i,4] - pre_pct[i,4], digits = 2)*100
 }
 # D
 for (i in D) {
-  growth[i] <- round(post_pct[i,5] - pre_pct[i,5], digits = 2)*100
+  growth[i,1] <- round(pre_pct[i,5], digits = 2)*100
+  growth[i,2] <- round(post_pct[i,5], digits = 2)*100
+  growth[i,3] <- round(post_pct[i,5] - pre_pct[i,5], digits = 2)*100
 }
 # E
 for (i in E) {
-  growth[i] <- round(post_pct[i,6] - pre_pct[i,6], digits = 2)*100
+  growth[i,1] <- round(pre_pct[i,6], digits = 2)*100
+  growth[i,2] <- round(post_pct[i,6], digits = 2)*100
+  growth[i,3] <- round(post_pct[i,6] - pre_pct[i,6], digits = 2)*100
+}
+
+# generate matrix with binary data for correct / incorrect
+for (i in 1:nrow(correct)) {
+  for (j in true.A) {
+    correct[i,j+2] <- ifelse(correct[i,j+2] == 1,1,0)
+  } 
+  for (j in false.B) {
+    correct[i,j+2] <- ifelse(correct[i,j+2] == 2,1,0)
+  } 
+  for (j in C) {
+    correct[i,j+2] <- ifelse(correct[i,j+2] == 3,1,0)
+  } 
+  for (j in D) {
+    correct[i,j+2] <- ifelse(correct[i,j+2] == 4,1,0)
+  } 
+  for (j in E) {
+    correct[i,j+2] <- ifelse(correct[i,j+2] == 5,1,0)
+  }
 }
 
 
-colnames(growth) <- c("Knowledge Source", "Physical Punishment", "Student Leadership", "Teacher-Centered", 
-                      "Classroom Activities", "Classroom Management", "Rules & Procedures", "Behaviorism",
-                      "Cognitivism", "Constructivism", "Student-Centered", "Classroom Management (2)", 
-                      "Student-teacher Relationship", "Collaborative Learning", "Group Work", "Classroom Strategies")
+names <- c("Knowledge Source", "Physical Punishment", "Student Leadership", "Teacher-Centered", 
+           "Classroom Activities", "Classroom Management", "Rules & Procedures", "Behaviorism",
+           "Cognitivism", "Constructivism", "Student-Centered", "Classroom Management (2)", 
+           "Student-teacher Relationship", "Collaborative Learning", "Group Work", "Classroom Strategies")
+
+growth <- data.frame(
+                names = as.factor(names), Pre = growth[,1], Post = growth[,2], Growth = growth[,3]
+              )
+
+# growth percentage
+ggplot(growth, aes(x = names, y = Growth)) +
+  geom_col(fill = "royalblue3") + 
+  geom_text(aes(label = paste(Growth,"%",sep=""), y = Growth + 2)) +
+  ggtitle("Growth Percentage") +
+  theme_classic() + 
+  theme(plot.title = element_text(size = 20, hjust = 0.5),
+        axis.text.x = element_text(angle = 35, vjust = 1, hjust=1),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.line.x = element_blank(),
+        plot.margin=unit(c(0.2,0.2,0,1),"cm")
+        ) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,100)) +
+  scale_x_discrete(limits = names)
 
 
+growth1 <- pivot_longer(growth, cols = c(Pre, Post),names_to = "pre_post")
+
+ggplot(growth1, aes(names, value, fill = pre_post)) +
+  geom_bar(position=position_dodge2(reverse = TRUE),stat = "identity",width = 1) +
+  geom_text(aes(label = paste(value,"%",sep=""), y = value + 2),
+            position = position_dodge(width = -1),
+            size = 3) +
+  ggtitle("Pre-Post Test Scores") +
+  theme_classic() + 
+  theme(plot.title = element_text(size = 20, hjust = 0.5),
+        axis.text.x = element_text(angle = 35, vjust = 1, hjust=1),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.line.x = element_blank(),
+        plot.margin=unit(c(0.2,0.2,0,1),"cm"),
+        aspect.ratio = 1/4
+  ) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,100)) +
+  scale_x_discrete(limits = names)
+
+
+
+# growth percentage
 png("growth_pct.png", width = 1000, height = 600) 
 op <- par(mar = c(13,4,2,1) + 1)
 growth.pct <- barplot(growth, names.arg = colnames(growth), las=2, cex.names=1.2, ylim = c(0,110), 

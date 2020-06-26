@@ -9,7 +9,7 @@
 # percent = TRUE will calculate the percentage of responses for each answer choice
 # percent == FALSE by default
 
-elem_count <- function(quest,choices,data,results,percent = FALSE) {
+elem_count <- function(data,quest,choices,percent = FALSE) {
   results <- matrix(0,quest,choices+1)
   if (percent == FALSE) {
     for (i in 1:quest) {
