@@ -70,7 +70,7 @@ pre_pct <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = TR
 
 #Post
   # data set with only post-test responses
-  post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]
+  post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]                       # filter(dta1, dta1$Pre_Post == "Pre")
 post <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = FALSE)
 post_pct <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = TRUE)
 
@@ -126,25 +126,6 @@ for (i in E) {
   growth[i,3] <- round(post_pct[i,6] - pre_pct[i,6], digits = 2)*100
 }
 
-# generate matrix with binary data for correct / incorrect
-for (i in 1:nrow(correct)) {
-  for (j in true.A) {
-    correct[i,j+2] <- ifelse(correct[i,j+2] == 1,1,0)
-  } 
-  for (j in false.B) {
-    correct[i,j+2] <- ifelse(correct[i,j+2] == 2,1,0)
-  } 
-  for (j in C) {
-    correct[i,j+2] <- ifelse(correct[i,j+2] == 3,1,0)
-  } 
-  for (j in D) {
-    correct[i,j+2] <- ifelse(correct[i,j+2] == 4,1,0)
-  } 
-  for (j in E) {
-    correct[i,j+2] <- ifelse(correct[i,j+2] == 5,1,0)
-  }
-}
-
 
 names <- c("Knowledge Source", "Physical Punishment", "Student Leadership", "Teacher-Centered", 
            "Classroom Activities", "Classroom Management", "Rules & Procedures", "Behaviorism",
@@ -187,7 +168,7 @@ ggplot(growth1, aes(names, value, fill = pre_post)) +
         axis.title.y = element_blank(),
         axis.line.x = element_blank(),
         plot.margin=unit(c(0.2,0.2,0,1),"cm"),
-        aspect.ratio = 1/4
+        aspect.ratio = 1/2
   ) +
   scale_y_continuous(expand = c(0,0), limits = c(0,100)) +
   scale_x_discrete(limits = names)
@@ -210,7 +191,6 @@ dev.off()
 for (i in 1:16) {
   assign(paste("pre_post", i, sep = ""), rbind(round(pre_pct[i,], digits = 2)*100, round(post_pct[i,], digits = 2)*100)) 
 }
-
 
 # True / False
 
