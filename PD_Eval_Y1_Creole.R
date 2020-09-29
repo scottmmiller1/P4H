@@ -5,7 +5,7 @@
 ################################################################
 
 
-setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rplots")
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Creole/Rplots")
 dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Evals Full.csv")
 dta <- filter(dta, dta$School == "MENFP") # change for each school
 
@@ -88,13 +88,13 @@ mean(dta$X16, na.rm = T)
 
 # avg. growth
 avg <- round(avg1, digits = 2)
-rownames(avg) <- c("Discipline","Student-Centered","Manage","Collaborate","Role","Theories")
+rownames(avg) <- c("Disiplinè","Santre sou Elèv","Jesyon","Kolaboratif","Wòl","Teyori")
 
 png("avg_growth.png", width = 700) 
 op <- par(mar = c(4,11,4,4) + 1)
 avg_growth <- barplot(avg[,3], names.arg = rownames(avg), las=1, cex.names= 1.5, xlim = c(0,2.5),
                       font.lab=1, font.main = 1, font.axis = 1, horiz = T, space = 1,
-                      col= c("royalblue3") , border="white", main = "Avg. Growth", cex.main=2) 
+                      col= c("royalblue3") , border="white", main = "Mwayèn Kwasans", cex.main=2) 
 text(y = avg_growth, avg[,3] + .12, paste(avg[,3]), cex=1.5) 
 par(op) ## reset
 dev.off() 
@@ -112,7 +112,7 @@ png("pos_growth.png", width = 700)
 op <- par(mar = c(4,4,6,1) + 1)
 pos_growth <- barplot(pos, names.arg = rownames(avg), las=1, cex.names= .85, ylim = c(0,110),
                       font.lab=1, font.main = 1, font.axis = 1, las = 1, space = 1,
-                      col= c("royalblue3") , border="white", main = "% with Positive Growth", cex.main=2) 
+                      col= c("royalblue3") , border="white", main = "% Kwasans pozitif", cex.main=2) 
 text(pos_growth, pos + 6, paste(pos,"%",sep=""), cex=1.5) 
 par(op) ## reset
 dev.off() 
@@ -135,13 +135,13 @@ for (i in 1:6) {
 }
 
 adj <- rbind(pos, v.h)
-colnames(adj) <- c("Discipline","Student-Centered","Manage","Collaborate","Role","Theories")
+colnames(adj) <- c("Disiplinè","Santre sou Elèv","Jesyon","Kolaboratif","Wòl","Teyori")
 
 png("adj_growth.png", width = 700) 
 op <- par(mar = c(4,4,6,1) + 1)
 pos_growth <- barplot(adj, names.arg = colnames(adj), las=1, cex.names= .85, ylim = c(0,110),
                       font.lab=1, font.main = 1, font.axis = 1, las = 1, space = 1,
-                      col= c("royalblue3", "firebrick2") , border="white", main = "Adj. % with Positive Growth", cex.main=2) 
+                      col= c("royalblue3", "firebrick2") , border="white", main = "Ajiste % Kwasans pozitif", cex.main=2) 
 text(pos_growth, adj.tot + 6, paste(adj.tot,"%",sep=""), cex=1.5) 
 par(op) ## reset
 dev.off() 
@@ -154,21 +154,21 @@ for (i in 1:12) {
   BA1[i,] <- (BA1[i,]/sum(BA1[i,]))*100
 }
 BA1 <- BA1[,-1]
-colnames(BA1) <- c("Very Low","Low","Medium","High","Very High")
-rownames(BA1) <- rep(c("Before","After"),6)
+colnames(BA1) <- c("Trè Ba","Ba","Pasab","Wo","Trè Wo")
+rownames(BA1) <- rep(c("Avan","Aprè"),6)
 
 d <- matrix(0,6,6)
 for (i in 1:6) {
   d[i,] <- (diff[i,4:9]/sum(diff[i,4:9]))*100
 }
-colnames(d) <- c("-1 Unit","0 Units","1 Unit","2 Units","3 Units","4 Units")
+colnames(d) <- c("-1 Inite","0 Inite","1 Inite","2 Inite","3 Inite","4 Inite")
 
 
 # 1
 png("b1.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b1 <- barplot(BA1[1:2,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Knowledge of Disciplinary Interventions", cex.main = 2,
+              main = "Entèvansyon Disiplinè", cex.main = 2,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 #text(b1, B_A1 + 5, paste(B_A1,"%",sep="") ,cex=1.9) 
@@ -181,7 +181,7 @@ dev.off()
 png("c1.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c1 <- barplot(d[1,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Knowledge of Disciplinary Interventions", cex.main = 1.8,
+              main = "Chanjman Nan Entèvansyon Disiplinè Yo", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c1, d[1,] + 5, paste(round(d[1,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -196,7 +196,7 @@ dev.off()
 png("b2.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b2 <- barplot(BA1[3:4,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Knowledge of Student-Centered Classrooms", cex.main = 1.8,
+              main = "Santre sou Elèv", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(BA1[3:4,]), 
@@ -208,7 +208,7 @@ dev.off()
 png("c2.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c2 <- barplot(d[2,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Knowledge of Student-Centered Classrooms", cex.main = 1.6,
+              main = "Chanjman Nan Santre sou Elèv", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c2, d[2,] + 5, paste(round(d[2,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -220,7 +220,7 @@ dev.off()
 png("b3.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b3 <- barplot(BA1[5:6,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Capacity to Manage Classroom", cex.main = 1.8,
+              main = "Jesyon Salklas", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(BA1[5:6,]), 
@@ -232,7 +232,7 @@ dev.off()
 png("c3.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c3 <- barplot(d[3,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Capacity to Manage Classroom", cex.main = 1.6,
+              main = "Chanjman Nan Jesyon Salklas", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c3, d[3,] + 5, paste(round(d[3,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -244,7 +244,7 @@ dev.off()
 png("b4.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b4 <- barplot(BA1[7:8,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Collaborative Learning Strategies", cex.main = 1.8,
+              main = "Estrateji Aprantisaj Kolaboratif", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(BA1[7:8,]), 
@@ -256,7 +256,7 @@ dev.off()
 png("c4.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c4 <- barplot(d[4,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Collaborative Learning Strategies", cex.main = 1.6,
+              main = "Estrateji Aprantisaj Kolaboratif", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c4, d[4,] + 5, paste(round(d[4,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -268,7 +268,7 @@ dev.off()
 png("b5.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b5 <- barplot(BA1[9:10,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Role", cex.main = 1.8,
+              main = "Wòl", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(BA1[9:10,]), 
@@ -280,7 +280,7 @@ dev.off()
 png("c5.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c5 <- barplot(d[5,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Role", cex.main = 1.6,
+              main = "Chanjman Nan Wòl", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c5, d[5,] + 5, paste(round(d[5,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -292,7 +292,7 @@ dev.off()
 png("b6.png", width = 800) 
 op <- par(mar = c(4,4,4,1) + 1)
 b6 <- barplot(BA1[11:12,], col= c("royalblue3","firebrick2"), border="white", 
-              main = "Learning Theories", cex.main = 1.8,
+              main = "Teyori Aprantisaj yo", cex.main = 1.8,
               font.main = 1, font.axis=1, beside=T,
               ylim = c(0,90), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 legend("top", legend = rownames(BA1[11:12,]), 
@@ -304,7 +304,7 @@ dev.off()
 png("c6.png", width = 800) 
 op <- par(mar = c(4,4,4,2) + 1)
 c6 <- barplot(d[6,], names.arg = colnames(d), las=1, col= c("royalblue3"), border="white", 
-              main = "Change in Learning Theories", cex.main = 1.6,
+              main = "Chanjman Nan Teyori Aprantisaj yo", cex.main = 1.6,
               font.main = 1, font.axis=1, beside=T, space = 1,
               ylim = c(0,80), font.lab=1, cex.axis = 1.5, cex.names = 1.5) 
 text(c6, d[6,] + 5, paste(round(d[6,],digits = 0),"%",sep="") ,cex=1.9) 
@@ -316,7 +316,7 @@ dev.off()
 # Eval Charts
 
 eval <- eval[,-1]
-colnames(eval) <- c("Strongly Disagree","Disagree","Neutral","Agree","Strongly Agree")
+colnames(eval) <- c("Pa Dakò Ditou Menm","Pa Dakò","Ni Youn ni Lòt","Dakò","Dakò Anpil Anpil")
 
 
 # 1

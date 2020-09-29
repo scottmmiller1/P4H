@@ -15,8 +15,8 @@ library(ggplot2)
 source("/Users/scottmiller/GitHub/P4H/elem_count.R")
 
 
-dta1 <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
-
+dta <- filter(dta, dta$Complete !="i") # deletes observations that did not take both exams
+dta1 <- filter(dta, dta$First !="Brenda")
 
 num <- matrix(0,nrow(dta1),19)
 

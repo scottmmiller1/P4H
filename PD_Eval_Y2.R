@@ -7,9 +7,9 @@
 
 #library(tidyverse)
 
-setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 2/")
-dta <- read.csv("Data/PD_20_Y2 Evals Full.csv")
-dta <- filter(dta, dta$School == "JOSEPH SCHOOL") # change for each school
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rplots")
+dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Evals Full.csv")
+dta <- filter(dta, dta$School == "MENFP") # change for each school
 
 
 ## Part 1
@@ -112,7 +112,6 @@ mean(dta$X16, na.rm = T)
 
 ## Run PD_Eval_19 prior to this section
 
-setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 2/JS/Rplots")
 
 # Summary
 

@@ -5,13 +5,13 @@
 ################################################################
 
 
-setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Rplots")
+setwd("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/MENFP/Creole/Rplots")
 dta <- read.csv("/Users/scottmiller/Desktop/P4H Global/Evaluation/PD/PD_20/Year 1/Data/PD_20_Y1 Exam Data Full.csv")
 
 ## packages
 library(tidyverse)
 library(ggplot2)
-  # element count function
+# element count function
 source("/Users/scottmiller/GitHub/P4H/elem_count.R")
 
 
@@ -60,8 +60,8 @@ answers <- elem_count(data = num[,-1],quest = 16, choices = 5, percent = FALSE)
 
 
 #Pre
-  # data set with only pre-test responses
-  pre_num <- num[-c(seq(2,nrow(num),by=2)),]
+# data set with only pre-test responses
+pre_num <- num[-c(seq(2,nrow(num),by=2)),]
 pre <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = FALSE)
 pre_pct <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = TRUE)
 
@@ -69,8 +69,8 @@ pre_pct <- elem_count(data = pre_num[,-1], quest = 16, choices = 5, percent = TR
 # -------------------------------------------------------
 
 #Post
-  # data set with only post-test responses
-  post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]                       # filter(dta1, dta1$Pre_Post == "Pre")
+# data set with only post-test responses
+post_num <- num[-c(1,seq(1,nrow(num)-1,by=2)),]                       # filter(dta1, dta1$Pre_Post == "Pre")
 post <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = FALSE)
 post_pct <- elem_count(data = post_num[,-1], quest = 16, choices = 5, percent = TRUE)
 
@@ -127,20 +127,20 @@ for (i in E) {
 }
 
 
-names <- c("Knowledge Source", "Physical Punishment", "Student Leadership", "Teacher-Centered", 
-           "Classroom Activities", "Classroom Management", "Rules & Procedures", "Behaviorism",
-           "Cognitivism", "Constructivism", "Student-Centered", "Classroom Management (2)", 
-           "Student-teacher Relationship", "Collaborative Learning", "Group Work", "Classroom Strategies")
+names <- c("Sous Konesans yo", "Chatiman Kòporèl", "Lidèchip Elèv", "Santre sou Pwofesè", 
+           "Aktivite nan Salklas", "Jesyon Salklas (1)", "Règ ak Pwosedi", "Beyavyoris",
+           "Coyitivis", "Konstritivis", "Santre sou Elèv", "Jesyon Salklas (2)", 
+           "Relasyon Elèv-Pwofesè", "Aprantisaj Kolaboratif", "Travay an Gwoup", "Estrateji nan Salklas")
 
 growth <- data.frame(
-                names = as.factor(names), Pre = growth[,1], Post = growth[,2], Growth = growth[,3]
-              )
+  names = as.factor(names), Pre = growth[,1], Post = growth[,2], Growth = growth[,3]
+)
 
 # growth percentage
 ggplot(growth, aes(x = names, y = Growth)) +
   geom_col(fill = "royalblue3") + 
   geom_text(aes(label = paste(Growth,"%",sep=""), y = Growth + 3),size=5) +
-  ggtitle("Growth Percentage") +
+  ggtitle("Kwasans") +
   theme_classic() + 
   theme(plot.title = element_text(size = 20, hjust = 0.5),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 12),
@@ -176,8 +176,8 @@ for (i in 1:16) {
 
 # 1
 pre_post1 <- t(pre_post1[,2:3])
-rownames(pre_post1) <- c("True","False")
-colnames(pre_post1) <- c("Pre","Post")
+rownames(pre_post1) <- c("Dakò","Pa Dakò")
+colnames(pre_post1) <- c("Pre","Pòs")
 
 png("pp1.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -195,8 +195,8 @@ dev.off()
 
 # 2
 pre_post2 <- t(pre_post2[,2:3])
-rownames(pre_post2) <- c("True","False")
-colnames(pre_post2) <- c("Pre","Post")
+rownames(pre_post2) <- c("Dakò","Pa Dakò")
+colnames(pre_post2) <- c("Pre","Pòs")
 
 png("pp2.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -213,8 +213,8 @@ dev.off()
 
 # 3
 pre_post3 <- t(pre_post3[,2:3])
-rownames(pre_post3) <- c("True","False")
-colnames(pre_post3) <- c("Pre","Post")
+rownames(pre_post3) <- c("Dakò","Pa Dakò")
+colnames(pre_post3) <- c("Pre","Pòs")
 
 png("pp3.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -231,8 +231,8 @@ dev.off()
 
 # 4
 pre_post4 <- t(pre_post4[,2:3])
-rownames(pre_post4) <- c("True","False")
-colnames(pre_post4) <- c("Pre","Post")
+rownames(pre_post4) <- c("Dakò","Pa Dakò")
+colnames(pre_post4) <- c("Pre","Pòs")
 
 png("pp4.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -249,8 +249,8 @@ dev.off()
 
 # 5
 pre_post5 <- t(pre_post5[,2:3])
-rownames(pre_post5) <- c("True","False")
-colnames(pre_post5) <- c("Pre","Post")
+rownames(pre_post5) <- c("Dakò","Pa Dakò")
+colnames(pre_post5) <- c("Pre","Pòs")
 
 png("pp5.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -267,8 +267,8 @@ dev.off()
 
 # 6
 pre_post6 <- t(pre_post6[,2:3])
-rownames(pre_post6) <- c("True","False")
-colnames(pre_post6) <- c("Pre","Post")
+rownames(pre_post6) <- c("Dakò","Pa Dakò")
+colnames(pre_post6) <- c("Pre","Pòs")
 
 png("pp6.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -285,8 +285,8 @@ dev.off()
 
 # 7
 pre_post7 <- t(pre_post7[,2:3])
-rownames(pre_post7) <- c("True","False")
-colnames(pre_post7) <- c("Pre","Post")
+rownames(pre_post7) <- c("Dakò","Pa Dakò")
+colnames(pre_post7) <- c("Pre","Pòs")
 
 png("pp7.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -310,7 +310,7 @@ dev.off()
 # 8
 pre_post8 <- t(pre_post8[,2:5])
 rownames(pre_post8) <- c("A","B","C","D")
-colnames(pre_post8) <- c("Pre","Post")
+colnames(pre_post8) <- c("Pre","Pòs")
 
 png("pp8.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -328,7 +328,7 @@ dev.off()
 # 9
 pre_post9 <- t(pre_post9[,2:5])
 rownames(pre_post9) <- c("A","B","C","D")
-colnames(pre_post9) <- c("Pre","Post")
+colnames(pre_post9) <- c("Pre","Pòs")
 
 png("pp9.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -347,7 +347,7 @@ dev.off()
 
 pre_post10 <- t(pre_post10[,2:5])
 rownames(pre_post10) <- c("A","B","C","D")
-colnames(pre_post10) <- c("Pre","Post")
+colnames(pre_post10) <- c("Pre","Pòs")
 
 png("pp10.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -366,7 +366,7 @@ dev.off()
 
 pre_post11 <- t(pre_post11[,2:5])
 rownames(pre_post11) <- c("A","B","C","D")
-colnames(pre_post11) <- c("Pre","Post")
+colnames(pre_post11) <- c("Pre","Pòs")
 
 png("pp11.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -385,7 +385,7 @@ dev.off()
 
 pre_post12 <- t(pre_post12[,2:5])
 rownames(pre_post12) <- c("A","B","C","D")
-colnames(pre_post12) <- c("Pre","Post")
+colnames(pre_post12) <- c("Pre","Pòs")
 
 png("pp12.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -404,7 +404,7 @@ dev.off()
 
 pre_post13 <- t(pre_post13[,2:5])
 rownames(pre_post13) <- c("A","B","C","D")
-colnames(pre_post13) <- c("Pre","Post")
+colnames(pre_post13) <- c("Pre","Pòs")
 
 png("pp13.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -423,7 +423,7 @@ dev.off()
 
 pre_post14 <- t(pre_post14[,2:5])
 rownames(pre_post14) <- c("A","B","C","D")
-colnames(pre_post14) <- c("Pre","Post")
+colnames(pre_post14) <- c("Pre","Pòs")
 
 png("pp14.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -442,7 +442,7 @@ dev.off()
 
 pre_post15 <- t(pre_post15[,2:5])
 rownames(pre_post15) <- c("A","B","C","D")
-colnames(pre_post15) <- c("Pre","Post")
+colnames(pre_post15) <- c("Pre","Pòs")
 
 png("pp15.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
@@ -461,7 +461,7 @@ dev.off()
 
 pre_post16 <- t(pre_post16[,2:6])
 rownames(pre_post16) <- c("A","B","C","D","E")
-colnames(pre_post16) <- c("Pre","Post")
+colnames(pre_post16) <- c("Pre","Pòs")
 
 png("pp16.png", width = 800) 
 op <- par(xpd=T, mar=par()$mar+c(0,-2,2,0))
